@@ -5,7 +5,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// midleware
+// middleware
 app.use(cors());
 app.use(express.json());
 
@@ -20,7 +20,16 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    console.log('database connected');
+    const database = client.db('doctors_portal');
+    const apppointmentsCollection = database.collection('appointments');
+
+    // POST appointments
+
+    app.post('/appointments', async (req, res) => {
+      const appointment = req.body;
+      const result = await apppointmentsCollection.insertOne(appointment);
+      res.send(result);
+    });
   } finally {
     //   await client.close();
   }
