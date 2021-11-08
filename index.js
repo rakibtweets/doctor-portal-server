@@ -54,7 +54,6 @@ async function run() {
     });
 
     // POST appointments
-
     app.post('/appointments', async (req, res) => {
       const appointment = req.body;
       const result = await apppointmentsCollection.insertOne(appointment);
@@ -62,7 +61,6 @@ async function run() {
     });
 
     //make admin
-
     app.get('/users/:email', async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
