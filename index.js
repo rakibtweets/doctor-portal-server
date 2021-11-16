@@ -40,7 +40,7 @@ async function verifyToken(req, res, next) {
 
   next();
 }
-
+// functionality start
 async function run() {
   try {
     await client.connect();
